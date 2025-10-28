@@ -44,27 +44,35 @@ SickSafetyscannersRos2::SickSafetyscannersRos2()
   initializeParameters(*this);
   loadParameters(*this);
 
+  // Topic prefixes
+  this->declare_parameter<std::string>("topic_prefix", "sick");
+  std::string topic_prefix = this->get_parameter("topic_prefix").as_string();
+  if (!topic_prefix.empty() &&
+      topic_prefix[topic_prefix.length() - 1] != '/') {
+    topic_prefix += "/";
+  }
+
   // init publishers and services
   m_laser_scan_publisher =
-      this->create_publisher<sensor_msgs::msg::LaserScan>("scan", 1);
+      this->create_publisher<sensor_msgs::msg::LaserScan>(topic_prefix + "scan", rclcpp::SensorDataQoS());
   m_extended_laser_scan_publisher = this->create_publisher<
-      sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>("extended_scan",
-                                                               1);
+      sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>(topic_prefix + "extended_scan",
+                                                               rclcpp::SensorDataQoS());
   m_output_paths_publisher =
       this->create_publisher<sick_safetyscanners2_interfaces::msg::OutputPaths>(
-          "output_paths", 1);
+          topic_prefix + "output_paths", rclcpp::SensorDataQoS());
   m_raw_data_publisher = this->create_publisher<
-      sick_safetyscanners2_interfaces::msg::RawMicroScanData>("raw_data", 1);
+      sick_safetyscanners2_interfaces::msg::RawMicroScanData>(topic_prefix + "raw_data", rclcpp::SensorDataQoS());
 
   m_field_data_service =
       this->create_service<sick_safetyscanners2_interfaces::srv::FieldData>(
-          "field_data",
+          topic_prefix + "field_data",
           std::bind(&SickSafetyscannersRos2::getFieldData, this,
                     std::placeholders::_1, std::placeholders::_2));
 
   m_status_overview_service = this->create_service<
       sick_safetyscanners2_interfaces::srv::StatusOverview>(
-      "status_overview",
+      topic_prefix + "status_overview",
       std::bind(&SickSafetyscannersRos2::getStatusOverview, this,
                 std::placeholders::_1, std::placeholders::_2));
 

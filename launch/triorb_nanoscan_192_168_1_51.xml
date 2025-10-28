@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="sick_safetyscanners2" exec="sick_safetyscanners2_node" name="sick_safetyscanners2_node" output="screen">
+
+    <param name="frame_id"                 value="sls51"          type="str"/>
+    <param name="sensor_ip"                value="192.168.1.51"   type="str"/>
+    <param name="host_ip"                  value="192.168.1.1"    type="str"/>
+    <param name="interface_ip"             value="0.0.0.0"        type="str"/>
+
+    <param name="host_udp_port"            value="0"              type="int"/>
+    <param name="channel"                  value="0"              type="int"/>
+    <param name="channel_enabled"          value="true"           type="bool"/>
+    <param name="skip"                     value="0"              type="int"/>
+
+    <param name="angle_start"              value="0.0" />
+    <param name="angle_end"                value="0.0" />
+
+    <param name="time_offset"              value="0.0" />
+
+    <param name="general_system_state"     value="true"           type="bool"/>
+    <param name="derived_settings"         value="true"           type="bool"/>
+    <param name="measurement_data"         value="true"           type="bool"/>
+    <param name="intrusion_data"           value="true"           type="bool"/>
+    <param name="application_io_data"      value="true"           type="bool"/>
+
+    <param name="use_persistent_config"    value="false"          type="bool"/>
+    <param name="min_intensities"          value="0.0" />
+
+  </node>
+</launch>
