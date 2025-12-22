@@ -54,15 +54,15 @@ SickSafetyscannersRos2::SickSafetyscannersRos2()
 
   // init publishers and services
   m_laser_scan_publisher =
-      this->create_publisher<sensor_msgs::msg::LaserScan>(topic_prefix + "scan", rclcpp::SensorDataQoS());
+      this->create_publisher<sensor_msgs::msg::LaserScan>(topic_prefix + "scan", rclcpp::SensorDataQoS().keep_last(1));
   m_extended_laser_scan_publisher = this->create_publisher<
       sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>(topic_prefix + "extended_scan",
-                                                               rclcpp::SensorDataQoS());
+                                                               rclcpp::SensorDataQoS().keep_last(1));
   m_output_paths_publisher =
       this->create_publisher<sick_safetyscanners2_interfaces::msg::OutputPaths>(
-          topic_prefix + "output_paths", rclcpp::SensorDataQoS());
+          topic_prefix + "output_paths", rclcpp::SensorDataQoS().keep_last(1));
   m_raw_data_publisher = this->create_publisher<
-      sick_safetyscanners2_interfaces::msg::RawMicroScanData>(topic_prefix + "raw_data", rclcpp::SensorDataQoS());
+      sick_safetyscanners2_interfaces::msg::RawMicroScanData>(topic_prefix + "raw_data", rclcpp::SensorDataQoS().keep_last(1));
 
   m_field_data_service =
       this->create_service<sick_safetyscanners2_interfaces::srv::FieldData>(
