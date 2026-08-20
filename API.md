@@ -1,7 +1,9 @@
 # sick_safetyscanners2
 
 SICK safety scanner の UDP データを ROS2 トピック／サービスへ変換します。
-`topic_prefix`（既定 `sick`）でプレフィクスを切り替えます。
+`topic_prefix`（既定 `sick`）でNode内の相対トピック名を切り替えます。
+`triorb_nanoscan.xml` の `ros_namespace` を指定すると、2台のSLS Nodeとその
+topic / serviceを同じROS namespaceへ配置できます。
 
 ## Active API
 

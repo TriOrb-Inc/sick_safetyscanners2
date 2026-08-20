@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-  <node pkg="sick_safetyscanners2" exec="sick_safetyscanners2_node" name="sick_sls51_node" output="screen">
+  <arg name="ros_namespace" default=""/>
+  <node pkg="sick_safetyscanners2" exec="sick_safetyscanners2_node" name="sick_sls51_node" namespace="$(var ros_namespace)" output="screen">
     <param name="frame_id"                 value="sls51"          type="str"/>
     <param name="sensor_ip"                value="192.168.1.51"   type="str"/>
     <param name="host_ip"                  value="192.168.1.1"    type="str"/>
@@ -20,7 +21,7 @@
     <param name="use_persistent_config"    value="false"          type="bool"/>
     <param name="min_intensities"          value="0.0" />
   </node>
-  <node pkg="sick_safetyscanners2" exec="sick_safetyscanners2_node" name="sick_sls52_node" output="screen">
+  <node pkg="sick_safetyscanners2" exec="sick_safetyscanners2_node" name="sick_sls52_node" namespace="$(var ros_namespace)" output="screen">
     <param name="frame_id"                 value="sls52"          type="str"/>
     <param name="sensor_ip"                value="192.168.1.52"   type="str"/>
     <param name="host_ip"                  value="192.168.1.1"    type="str"/>
